@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useGlobalContext } from './context'
 
 const Submenu = () => {
+  const{subLinksArr} = useGlobalContext();
 
   return (
     <aside className='submenu'>
