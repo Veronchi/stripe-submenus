@@ -6,13 +6,17 @@ import { useGlobalContext } from './context'
 const Navbar = () => {
   const { setCoordinatesValue, setBtnValue } = useGlobalContext();
 
-  const changeCoordinates = (e) => {
+  const addCoordinates = (e) => {
     const text = e.target.textContent
     const { left, top } = e.target.getBoundingClientRect();
     const fixedLeft = parseFloat(left.toFixed(3));
-    
+
     setBtnValue(text);
     setCoordinatesValue({ left: fixedLeft, top: top });
+  }
+
+  const deleteBtnValue = (e) => {
+    setBtnValue('')
   }
 
   return (
@@ -26,13 +30,28 @@ const Navbar = () => {
         </div>
         <ul className='nav-links'>
           <li>
-            <button className='link-btn' onMouseOver={(event) => changeCoordinates(event)}>products</button>
+            <button className='link-btn'
+              onMouseEnter={(event) => addCoordinates(event)}
+              onMouseLeave={(e) => deleteBtnValue(e)}
+            >
+              products
+            </button>
           </li>
           <li>
-            <button className='link-btn' onMouseOver={(event) => changeCoordinates(event)}>developers</button>
+            <button className='link-btn'
+              onMouseEnter={(event) => addCoordinates(event)}
+              onMouseLeave={(e) => deleteBtnValue(e)}
+            >
+              developers
+            </button>
           </li>
           <li>
-            <button className='link-btn' onMouseOver={(event) => changeCoordinates(event)}>company</button>
+            <button className='link-btn'
+              onMouseEnter={(event) => addCoordinates(event)}
+              onMouseLeave={(e) => deleteBtnValue(e)}
+            >
+              company
+            </button>
           </li>
         </ul>
         <button className='btn signin-btn'>Sign in</button>

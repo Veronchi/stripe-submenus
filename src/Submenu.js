@@ -7,8 +7,10 @@ const Submenu = () => {
   const [links, setLinks] = useState([]);
   const submenuRef = useRef();
 
-  console.log(submenuRef)
   useEffect(() => {
+    if(btnValue === '') {
+      setLinks([]);
+    }
     if (btnValue !== '') {
       let { links } = subLinksArr.find((item) => item.page === btnValue)
 
@@ -25,7 +27,7 @@ const Submenu = () => {
   }, [coordinatesValue])
 
   return (
-    <aside className='submenu' ref={submenuRef}>
+    <aside className={btnValue ? 'submenu show' : 'submenu'} ref={submenuRef}>
       <section>
         <h4>{btnValue}</h4>
         <div className='submenu-center'>
