@@ -1,26 +1,38 @@
 import React from 'react'
 import logo from './images/logo.svg'
 import { FaBars } from 'react-icons/fa'
+import { useGlobalContext } from './context'
 
 const Navbar = () => {
+  const { setCoordinatesValue, setBtnValue } = useGlobalContext();
+
+  const changeCoordinates = (e) => {
+    const text = e.target.textContent
+    const { left, top } = e.target.getBoundingClientRect();
+    const fixedLeft = parseFloat(left.toFixed(3));
+    
+    setBtnValue(text);
+    setCoordinatesValue({ left: fixedLeft, top: top });
+  }
+
   return (
     <nav className='nav'>
       <div className='nav-center'>
         <div className='nav-header'>
-          <img className='nav-logo' src={logo} alt='nav-logo'/>
+          <img className='nav-logo' src={logo} alt='nav-logo' />
           <button className='btn toggle-btn'>
             <FaBars />
           </button>
         </div>
         <ul className='nav-links'>
           <li>
-            <button className='link-btn'>products</button>
+            <button className='link-btn' onMouseOver={(event) => changeCoordinates(event)}>products</button>
           </li>
           <li>
-            <button className='link-btn'>developers</button>
+            <button className='link-btn' onMouseOver={(event) => changeCoordinates(event)}>developers</button>
           </li>
           <li>
-            <button className='link-btn'>company</button>
+            <button className='link-btn' onMouseOver={(event) => changeCoordinates(event)}>company</button>
           </li>
         </ul>
         <button className='btn signin-btn'>Sign in</button>
