@@ -30,7 +30,7 @@ const Submenu = () => {
     <aside className={btnValue ? 'submenu show' : 'submenu'} ref={submenuRef}>
       <section>
         <h4>{btnValue}</h4>
-        <div className='submenu-center'>
+        <div className={links.length ? `submenu-center col-${links.length}` : 'submenu-center'}>
           {links.map(({ label, icon, url }, id) => {
             return (
               <a key={`id${id}`} href={url}>
