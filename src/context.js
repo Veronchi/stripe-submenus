@@ -8,6 +8,19 @@ function AppProvider({ children }) {
   const [coordinatesValue, setCoordinatesValue] = useState({});
   const [btnValue, setBtnValue] = useState('');
 
+  const addCoordinates = (e) => {
+    const text = e.target.textContent
+    const { left, top } = e.target.getBoundingClientRect();
+    const fixedLeft = parseFloat(left.toFixed(3));
+
+    setBtnValue(text);
+    setCoordinatesValue({ left: fixedLeft, top: top });
+  }
+
+  const deleteBtnValue = (e) => {
+    setBtnValue('')
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -15,7 +28,9 @@ function AppProvider({ children }) {
         coordinatesValue,
         btnValue,
         setCoordinatesValue,
-        setBtnValue
+        setBtnValue,
+        addCoordinates,
+        deleteBtnValue
       }}
     >
       {children}

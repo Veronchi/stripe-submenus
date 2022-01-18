@@ -4,20 +4,7 @@ import { FaBars } from 'react-icons/fa'
 import { useGlobalContext } from './context'
 
 const Navbar = () => {
-  const { setCoordinatesValue, setBtnValue } = useGlobalContext();
-
-  const addCoordinates = (e) => {
-    const text = e.target.textContent
-    const { left, top } = e.target.getBoundingClientRect();
-    const fixedLeft = parseFloat(left.toFixed(3));
-
-    setBtnValue(text);
-    setCoordinatesValue({ left: fixedLeft, top: top });
-  }
-
-  const deleteBtnValue = (e) => {
-    setBtnValue('')
-  }
+  const { addCoordinates, deleteBtnValue } = useGlobalContext();
 
   return (
     <nav className='nav'>
@@ -48,7 +35,7 @@ const Navbar = () => {
           <li>
             <button className='link-btn'
               onMouseEnter={(event) => addCoordinates(event)}
-              onMouseLeave={(e) => deleteBtnValue(e)}
+              onMouseLeave={() => deleteBtnValue()}
             >
               company
             </button>
