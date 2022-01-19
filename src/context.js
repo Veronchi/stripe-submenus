@@ -4,33 +4,29 @@ import sublinks from './data'
 const AppContext = React.createContext();
 
 function AppProvider({ children }) {
-  const [subLinksArr, setSubLinksArr] = useState(sublinks);
+
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState({ page: '', links: [] });
   const [coordinatesValue, setCoordinatesValue] = useState({});
-  const [btnValue, setBtnValue] = useState('');
 
-  const addCoordinates = (e) => {
-    const text = e.target.textContent
-    const { left, top } = e.target.getBoundingClientRect();
-    const fixedLeft = parseFloat(left.toFixed(3));
-
-    setBtnValue(text);
-    setCoordinatesValue({ left: fixedLeft, top: top });
+  const openSubmenu = (text, coordinates) => {
+    const page = sublinks.find((item) => item.page === text);
+    setCurrentPage(page);
+    setIsSubmenuOpen(true);
+    setCoordinatesValue(coordinates);
   }
-
-  const deleteBtnValue = (e) => {
-    setBtnValue('')
-  }
+  const closeSubmenu = () => {
+    setIsSubmenuOpen(false)
+  };
 
   return (
     <AppContext.Provider
       value={{
-        subLinksArr,
+        isSubmenuOpen,
+        currentPage,
         coordinatesValue,
-        btnValue,
-        setCoordinatesValue,
-        setBtnValue,
-        addCoordinates,
-        deleteBtnValue
+        openSubmenu,
+        closeSubmenu,
       }}
     >
       {children}
@@ -42,4 +38,4 @@ export const useGlobalContext = () => {
   return useContext(AppContext);
 }
 
-export {AppContext, AppProvider}
+export { AppContext, AppProvider }

@@ -4,10 +4,23 @@ import { FaBars } from 'react-icons/fa'
 import { useGlobalContext } from './context'
 
 const Navbar = () => {
-  const { addCoordinates, deleteBtnValue } = useGlobalContext();
+  const { closeSubmenu, openSubmenu } = useGlobalContext();
+  const calcBtnValues = (e) => {
+    const text = e.target.textContent
+    const { left, top } = e.target.getBoundingClientRect();
+    const roundedLeft = parseFloat(left.toFixed(3));
+    const coordinates = {roundedLeft , top};
+    openSubmenu(text, coordinates);
+  }
+
+  const handleSubmenu = (e) => {
+    if (!e.target.classList.contains('link-btn')) {
+      closeSubmenu();
+    }
+  };
 
   return (
-    <nav className='nav'>
+    <nav className='nav' onMouseOver={handleSubmenu}>
       <div className='nav-center'>
         <div className='nav-header'>
           <img className='nav-logo' src={logo} alt='nav-logo' />
@@ -17,26 +30,17 @@ const Navbar = () => {
         </div>
         <ul className='nav-links'>
           <li>
-            <button className='link-btn'
-              onMouseEnter={(event) => addCoordinates(event)}
-              onMouseLeave={(e) => deleteBtnValue(e)}
-            >
+            <button className='link-btn' onMouseOver={calcBtnValues}>
               products
             </button>
           </li>
           <li>
-            <button className='link-btn'
-              onMouseEnter={(event) => addCoordinates(event)}
-              onMouseLeave={(e) => deleteBtnValue(e)}
-            >
+            <button className='link-btn' onMouseOver={calcBtnValues}>
               developers
             </button>
           </li>
           <li>
-            <button className='link-btn'
-              onMouseEnter={(event) => addCoordinates(event)}
-              onMouseLeave={() => deleteBtnValue()}
-            >
+            <button className='link-btn' onMouseOver={calcBtnValues}>
               company
             </button>
           </li>
