@@ -4,7 +4,7 @@ import { useGlobalContext } from './context'
 const Submenu = () => {
   const { currentPage: { page, links }, coordinatesValue, isSubmenuOpen } = useGlobalContext();
 
-  const [columns, setColumns] = useState('')
+  const [columns, setColumns] = useState('');
   const submenuRef = useRef();
 
   useEffect(() => {
