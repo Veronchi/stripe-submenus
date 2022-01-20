@@ -4,7 +4,7 @@ import { FaBars } from 'react-icons/fa'
 import { useGlobalContext } from './context'
 
 const Navbar = () => {
-  const { closeSubmenu, openSubmenu } = useGlobalContext();
+  const { closeSubmenu, openSubmenu, openSidebar } = useGlobalContext();
   const calcBtnValues = (e) => {
     const text = e.target.textContent
     const { left, top } = e.target.getBoundingClientRect();
@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className='nav-center'>
         <div className='nav-header'>
           <img className='nav-logo' src={logo} alt='nav-logo' />
-          <button className='btn toggle-btn'>
+          <button className='btn toggle-btn' onClick={openSidebar}>
             <FaBars />
           </button>
         </div>
